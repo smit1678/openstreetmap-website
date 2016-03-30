@@ -18,7 +18,7 @@ L.OSM.Map = L.Map.extend({
 
     this.baseLayers = [];
 
-    this.baseLayers.push(new L.TileLayer("/tiles/mm/{z}/{x}/{y}.png", {
+    this.baseLayers.push(new L.TileLayer("http://posm.io/tiles/mm/{z}/{x}/{y}.png", {
         attribution: copyright + ". Tiles courtesy of American Red Cross",
         code: "P",
         keyid: "posm",
