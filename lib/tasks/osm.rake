@@ -30,17 +30,21 @@ namespace :osm do
 
       crypt, salt = PasswordHash.create(ENV["password"] || OSM.make_token(8))
 
-      user = User.find_or_create_by! \
-        display_name: ENV["display_name"],
-        description: ENV["description"] || "Generated user",
-        email: "#{OSM.make_token(8)}@#{OSM.make_token(8)}.#{OSM.make_token(3)}".downcase,
-        terms_seen: true,
-        terms_agreed: Time.now,
-        data_public: true,
-        status: "active",
-        email_valid: false,
-        pass_crypt: crypt,
-        pass_salt: salt
+      user = User.find_by_display_name(ENV["display_name"])
+
+      unless user
+        user = User.create! \
+          display_name: ENV["display_name"],
+          description: ENV["description"] || "Generated user",
+          email: "#{OSM.make_token(8)}@#{OSM.make_token(8)}.#{OSM.make_token(3)}".downcase,
+          terms_seen: true,
+          terms_agreed: Time.now,
+          data_public: true,
+          status: "active",
+          email_valid: false,
+          pass_crypt: crypt,
+          pass_salt: salt
+      end
 
       puts user.to_json
     end
