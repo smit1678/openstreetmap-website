@@ -46,10 +46,11 @@ folder 'vendor/assets' do
   end
 
   folder 'iD' do
-    from 'git://github.com/openstreetmap/iD', :branch => 'release' do
+    from 'git://github.com/smit1678/iD', :branch => 'custom-damage-assessment' do
       folder 'iD/img', 'dist/img'
       folder 'iD/locales', 'dist/locales'
       folder 'iD/traffico', 'dist/traffico'
+      folder 'iD/mapillary-js', 'dist/mapillary-js'
 
       file 'iD.css.erb', 'dist/iD.css' do |path|
         rewrite(path) do |content|
@@ -66,8 +67,6 @@ folder 'vendor/assets' do
       File.delete('vendor/assets/iD/iD/traffico/stylesheets/traffico.css')
 
       file 'iD.js', 'dist/iD.js'
-      file 'presets.js', 'dist/presets.js'
-      file 'imagery.js', 'dist/imagery.js'
     end
   end
 
